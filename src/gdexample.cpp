@@ -13,6 +13,8 @@ void GDExample::_bind_methods() {
 		ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "speed", PROPERTY_HINT_RANGE, "0,20,0.01"), "set_speed", "get_speed");
 
 		ADD_SIGNAL(MethodInfo("position_changed", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::VECTOR2, "new_pos")));
+
+		ADD_SIGNAL(MethodInfo("world_updated", PropertyInfo(Variant::OBJECT, "node"), PropertyInfo(Variant::ARRAY, "new_world")));
 }
 
 GDExample::GDExample() {
@@ -42,7 +44,18 @@ void GDExample::_process(double delta) {
 		emit_signal("position_changed", this, new_position);
 		time_emit = 0.0;
 	}
-	
+
+	const int width = 40;
+	const int height = 40;
+
+	godot::Array a;
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+				a.append(float(y) / float(height));
+		}
+	}
+
+	emit_signal("world_updated", this, a);
 }
 
 void GDExample::set_amplitude(const double p_amplitude) {

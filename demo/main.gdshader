@@ -12,6 +12,11 @@ uniform int iter;
     //COLOR = vec4(UV.x, UV.y, 0.5, 1.0);
 //}
 
+void vertex() {
+    //VERTEX.x += (10.0 * sin(TIME)); // offset vertex x by sine function on time elapsed
+	//VERTEX.y += (10.0 * cos(TIME)); // offset vertex x by sine function on time elapsed
+}
+
 void fragment() {
     vec2 z, c;
 	int i2;
@@ -34,7 +39,12 @@ void fragment() {
 		i++;
     }
 
-    COLOR = texture(tex, vec2((i2 == iter ? 0.0 : float(i2)) / 100.0, 0.0));
+    //COLOR = vec4(UV.x, UV.y, 0.5, 1.0);
+	float tIndex = 0.0;
+	if (i2 != iter) {
+		tIndex = float(i2) / 100.0;
+	}
+    COLOR = texture(tex, vec2(tIndex, 0.0));
 }
 
 //void light() {

@@ -1,2 +1,4 @@
-godot-cpp/*
-.src/*.os
+godot-cpp/
+*.os
+*.cache
+*.godot
