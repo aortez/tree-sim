@@ -12,10 +12,10 @@ uniform int iter;
     //COLOR = vec4(UV.x, UV.y, 0.5, 1.0);
 //}
 
-void vertex() {
+//void vertex() {
     //VERTEX.x += (10.0 * sin(TIME)); // offset vertex x by sine function on time elapsed
 	//VERTEX.y += (10.0 * cos(TIME)); // offset vertex x by sine function on time elapsed
-}
+//}
 
 void fragment() {
     vec2 z, c;

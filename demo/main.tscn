@@ -1,25 +1,26 @@
 [gd_scene load_steps=4 format=3 uid="uid://chp2vv6e4vhib"]
 
-[ext_resource type="Script" path="res://tree_world.gd" id="2_am0ns"]
+[ext_resource type="Script" path="res://treesim.gd" id="2_ecj72"]
 [ext_resource type="Shader" path="res://display.gdshader" id="4_ynne7"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6irjn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6r2ie"]
 shader = ExtResource("4_ynne7")
 shader_parameter/world = null
 
-[node name="Node2D" type="Node2D"]
+[node name="TreeInABox" type="Node2D"]
+script = ExtResource("2_ecj72")
 
-[node name="TreeWorld" type="Node" parent="."]
-script = ExtResource("2_am0ns")
-
-[node name="World" type="GDExample" parent="TreeWorld"]
-amplitude = 0.0
+[node name="TreeSim" type="TreeSim" parent="."]
+speed = 0.0
+position = Vector2(10, 20)
 centered = false
 
-[node name="WorldDisplay" type="ColorRect" parent="TreeWorld"]
-material = SubResource("ShaderMaterial_6irjn")
-offset_right = 599.0
-offset_bottom = 602.0
+[node name="Display" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6r2ie")
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 606.0
+offset_bottom = 608.0
 
-[connection signal="position_changed" from="TreeWorld/World" to="TreeWorld/World" method="_on_position_changed"]
-[connection signal="world_updated" from="TreeWorld/World" to="TreeWorld" method="_on_world_world_updated"]
+[connection signal="position_changed" from="TreeSim" to="." method="_on_tree_sim_position_changed"]
+[connection signal="world_updated" from="TreeSim" to="." method="_on_tree_sim_world_updated"]
