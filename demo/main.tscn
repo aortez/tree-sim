@@ -11,16 +11,15 @@ shader_parameter/world = null
 script = ExtResource("2_ecj72")
 
 [node name="TreeSim" type="TreeSim" parent="."]
-speed = 0.0
-position = Vector2(10, 20)
+amplitude = 50.0
+speed = 0.5
+position = Vector2(1.34783, 23.1348)
 centered = false
 
 [node name="Display" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_6r2ie")
-offset_left = 10.0
-offset_top = 6.0
-offset_right = 606.0
-offset_bottom = 608.0
+offset_right = 600.0
+offset_bottom = 600.0
 
 [connection signal="position_changed" from="TreeSim" to="." method="_on_tree_sim_position_changed"]
 [connection signal="world_updated" from="TreeSim" to="." method="_on_tree_sim_world_updated"]
