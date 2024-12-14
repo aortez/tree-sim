@@ -12,8 +12,7 @@ script = ExtResource("2_ecj72")
 
 [node name="TreeSim" type="TreeSim" parent="."]
 amplitude = 50.0
-speed = 0.5
-position = Vector2(1.34783, 23.1348)
+position = Vector2(4.26347, 54.0322)
 centered = false
 
 [node name="Display" type="ColorRect" parent="."]

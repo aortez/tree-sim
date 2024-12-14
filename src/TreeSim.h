@@ -27,12 +27,18 @@ public:
     void set_speed(const double p_amplitude);
     double get_speed() const;
 
-    enum class BlockDisplayType { Air, DirtHeavy, DirtMedium, DirtLight };
+    enum class BlockDisplayType { Air, DirtHeavy, DirtMedium, DirtLight, Water };
 
     struct Block {
     	BlockDisplayType render() const;
 
     	float dirty = 0;
+
+    	float vx = 0;
+
+		float vy = 0;
+
+    	float wet = 0;
     };
 
     Block& b(int x, int y);

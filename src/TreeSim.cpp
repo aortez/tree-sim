@@ -26,7 +26,7 @@ void TreeSim::_bind_methods() {
 
 	ADD_SIGNAL(
 			MethodInfo("world_updated", PropertyInfo(Variant::OBJECT, "node"),
-					PropertyInfo(Variant::ARRAY, "new_world")));
+					PropertyInfo(Variant::PACKED_VECTOR2_ARRAY, "new_world")));
 }
 
 TreeSim::TreeSim() {
@@ -108,7 +108,7 @@ void TreeSim::physics(const double delta) {
 			}
 
 			// If nothing has fallen yet, allow just a little to fall to the side.
-			if (centerBlock.dirty < 0.2) {
+			if (centerBlock.dirty < 0.1) {
 				continue;
 			}
 			if (x > 0 && x < (WIDTH - 1)) {
@@ -151,10 +151,12 @@ void TreeSim::_process(double delta) {
 
 		time_emit = 0.0;
 
-		godot::Array a;
+		godot::PackedVector2Array a;
 		for (int y = 0; y < HEIGHT; y++) {
 			for (int x = 0; x < WIDTH; x++) {
-				a.append(static_cast<int>(b(x, HEIGHT - y - 1).render()));
+				const Block& block = b(x, HEIGHT - y - 1);
+				const godot::Vector2 v(block.dirty, block.wet);
+				a.append(v);
 			}
 		}
 		emit_signal("world_updated", this, a);
