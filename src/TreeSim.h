@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "vec2.h"
+#include "World.h"
 
 #include <godot_cpp/classes/sprite2d.hpp>
 
@@ -33,22 +33,7 @@ public:
     void set_speed(const double p_amplitude);
     double get_speed() const;
 
-    struct Block
-    {
-        double dirty = 0;
-
-        Vector2 com = Vector2(0.5, 0.5);
-
-        Vector2 v;
-
-        double wet = 0;
-
-        std::string toString() const;
-    };
-
-    Block& b(int x, int y);
-
-    std::vector<Block> blocks;
+    treesim::World world;
 
 protected:
     static void _bind_methods();
