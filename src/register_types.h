@@ -4,6 +4,6 @@
 
 using namespace godot;
 
-void initialize_example_module(ModuleInitializationLevel p_level);
-void uninitialize_example_module(ModuleInitializationLevel p_level);
+void initialize_treesim_module(ModuleInitializationLevel p_level);
+void uninitialize_treesim_module(ModuleInitializationLevel p_level);
 

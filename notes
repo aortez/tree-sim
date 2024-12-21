@@ -1,3 +1,5 @@
 ideas:
 * tree simulator
 * water w/ swimming duck
+
+move cov from [0,1] to [-1,1]

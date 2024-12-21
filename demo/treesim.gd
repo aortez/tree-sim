@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_tree_sim_position_changed(_node: Object, _new_pos: Vector2) -> void:
-	#print("wow")
+	print("wow")
 	pass
 	
 func _on_tree_sim_world_updated(_node: Object, new_world: Array) -> void:

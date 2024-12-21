@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec2[1600] world;
+uniform vec4[1600] world;
 
 void fragment() {
 	const int width = 40;
@@ -23,13 +23,17 @@ void fragment() {
 	int y = int(UV.y * float(height));
 
 	int i = int(y * width + x) % world.length();
-	float d = world[i].x;
-	if (d > 0.95) {
-		COLOR = vec4(brownH.r, brownH.g, brownH.b, 1.0);
-	} else if (d > 0.3) {
-		COLOR = vec4(brownM.r, brownM.g, brownM.b, 1.0);
-	} else if (d > 0.1) {
-		COLOR = vec4(brownL.r, brownL.g, brownL.b, 1.0);
+	float d = world[i][0];
+	float comX = world[i].y;
+	float comY = world[i].z;
+
+	if (d > 0.03) {
+		//COLOR = vec4(brownH.r, brownH.g, brownH.b, d * d * d * d);
+		d = pow(d, 0.2);
+		COLOR = vec4(
+			brownH.r * d + (blue.r) * (1.0-d),
+			brownH.g * d + (blue.g) * (1.0-d),
+			brownH.b * d + (blue.b) * (1.0-d), 1.0);
 	} else {
 		COLOR = vec4(blue.r, blue.g, blue.b, 1.0);
 	}

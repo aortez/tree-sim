@@ -1,13 +1,19 @@
 #pragma once
 
+//#include "vec2.h"
+
 #include <godot_cpp/classes/sprite2d.hpp>
 
 #include <vector>
 
-namespace godot {
+namespace godot
+{
 
-class TreeSim : public Sprite2D {
-    GDCLASS(TreeSim, Sprite2D)
+struct Vector2;
+
+class TreeSim: public Sprite2D
+{
+GDCLASS(TreeSim, Sprite2D)
 
 private:
     void physics(double delta);
@@ -27,18 +33,17 @@ public:
     void set_speed(const double p_amplitude);
     double get_speed() const;
 
-    enum class BlockDisplayType { Air, DirtHeavy, DirtMedium, DirtLight, Water };
+    struct Block
+    {
+        double dirty = 0;
 
-    struct Block {
-    	BlockDisplayType render() const;
+        Vector2 com = Vector2(0.5, 0.5);
 
-    	float dirty = 0;
+        Vector2 v;
 
-    	float vx = 0;
+        double wet = 0;
 
-		float vy = 0;
-
-    	float wet = 0;
+        std::string toString() const;
     };
 
     Block& b(int x, int y);
