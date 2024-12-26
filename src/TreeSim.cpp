@@ -29,12 +29,16 @@ std::string toString(const Vector2 &v)
 void TreeSim::_bind_methods()
 {
     ClassDB::bind_method(D_METHOD("get_amplitude"), &TreeSim::get_amplitude);
+
     ClassDB::bind_method(D_METHOD("set_amplitude", "p_amplitude"),
             &TreeSim::set_amplitude);
     ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "amplitude"), "set_amplitude",
             "get_amplitude");
 
+    ClassDB::bind_method(D_METHOD("reset"), &TreeSim::reset);
+
     ClassDB::bind_method(D_METHOD("get_speed"), &TreeSim::get_speed);
+
     ClassDB::bind_method(D_METHOD("set_speed", "p_speed"), &TreeSim::set_speed);
     ADD_PROPERTY(
             PropertyInfo(Variant::FLOAT, "speed", PROPERTY_HINT_RANGE,
@@ -113,6 +117,11 @@ void TreeSim::set_amplitude(const double p_amplitude)
 double TreeSim::get_amplitude() const
 {
     return amplitude;
+}
+
+void TreeSim::reset()
+{
+    world.reset();
 }
 
 void TreeSim::set_speed(const double p_speed)

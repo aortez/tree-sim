@@ -33,6 +33,8 @@ public:
     void set_speed(const double p_amplitude);
     double get_speed() const;
 
+    void reset();
+
     treesim::World world;
 
 protected:

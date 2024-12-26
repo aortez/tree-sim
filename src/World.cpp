@@ -121,7 +121,7 @@ void World::physics(const double delta, const double g)
         {
             if (b(x, y).dirty == 0)
             {
-                b(x, y) = {};
+                b(x, y) = { };
                 continue;
             }
 
@@ -131,6 +131,7 @@ void World::physics(const double delta, const double g)
                 b(x, y).v.y -= (g * delta);
             } else
             {
+                // Otherwise see if we should apply it slightly to the side.
                 double leftDirt = 2;
                 double rightDirt = 2;
                 if (x + 1 < WIDTH)
@@ -227,7 +228,7 @@ void World::physics(const double delta, const double g)
                         } else if (isOnSameY)
                         {
                             b(x, y).v.x *= 0;
-                            b(x, y).v.y *= 0.9;
+                            b(x, y).v.y *= 0.5;
                         } else
                         {
                             b(x, y).v *= 0.1;
@@ -238,15 +239,15 @@ void World::physics(const double delta, const double g)
 
             if (target.x >= WIDTH || target.x < 0)
             {
-                b(x, y).v.x = -block.v.x;
+                b(x, y).v.x = -block.v.x * 0.9;
             }
 
             if (target.y < 0)
             {
-                b(x, y).v.y = -(y + block.com.y) / delta * 0.5;
+                b(x, y).v.y = -block.v.y * 0.3;
             } else if (target.y >= HEIGHT)
             {
-                b(x, y).v.y = -block.v.y * 0.5;
+                b(x, y).v.y = -block.v.y * 0.7;
             }
 
             Vector2 p = b(x, y).v * delta + block.com;
@@ -270,13 +271,11 @@ void World::physics(const double delta, const double g)
 
             // Queue up move.
             //            b(x, y).dirty -= amount;
-            s(x, y).moves.push_back(DirtMove
-                { .amount = -amount, .remainder = block.com, .v = b(x, y).v });
+            s(x, y).moves.push_back(DirtMove { .amount = -amount, .remainder =
+                    block.com, .v = b(x, y).v });
 
-            s(t.x, t.y).moves.push_back(
-                    DirtMove
-                        { .amount = amount, .remainder = p - p.floor(), .v = b(
-                                x, y).v });
+            s(t.x, t.y).moves.push_back(DirtMove { .amount = amount,
+                    .remainder = p - p.floor(), .v = b(x, y).v });
         }
     }
 
@@ -350,6 +349,17 @@ void World::physics(const double delta, const double g)
             {
                 continue;
             }
+        }
+    }
+}
+
+void World::reset()
+{
+    for (int y = 0; y < HEIGHT; y++)
+    {
+        for (int x = 0; x < WIDTH; x++)
+        {
+            b(x, y).dirty = 0;
         }
     }
 }

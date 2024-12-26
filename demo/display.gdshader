@@ -27,7 +27,7 @@ void fragment() {
 	float comX = world[i].y;
 	float comY = world[i].z;
 
-	if (d > 0.03) {
+	if (d > 0.05) {
 		//COLOR = vec4(brownH.r, brownH.g, brownH.b, d * d * d * d);
 		d = pow(d, 0.2);
 		COLOR = vec4(

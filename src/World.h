@@ -23,12 +23,16 @@ struct Block
 
     double wet = 0;
 
+    double woody = 0;
+
     std::string toString() const;
 };
 
 struct World
 {
     World();
+
+    void reset();
 
     void physics(double delta, double gravity);
 

@@ -1,9 +1,12 @@
 extends Node
 
 @onready var world_display = $Display
+@onready var reset_button = $ResetButton
+@onready var tree_sim = $TreeSim
 
 func _ready() -> void:
 	# Called when the node enters the scene tree for the first time.
+	reset_button.connect("pressed", Callable(tree_sim, "reset"));
 	pass
 
 func _process(_delta: float) -> void:
